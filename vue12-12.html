@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../vue.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script type="text/javascript">
+		
+		var vm = new Vue({
+			el : "#app",
+			data : {
+				msg : 'hello2',
+				txt : ''
+			},
+			template : "<p>{{msg}} <input type='text' v-model='txt'/> 还剩下{{30-txt.length}}个数字",
+			watch : {
+				txt(n){
+					if(n.length>30){
+						this.txt = n.slice(0,30);
+					}
+				}
+			}
+		})
+		console.log(vm)
+	</script>
+</html>

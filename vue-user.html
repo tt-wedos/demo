@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../vue.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="app">
+			<input type="text" v-model="username" name="" id="" value="" />
+			<input type="text" v-model="password" name="" id="" value="" />
+			{{info}}
+			
+		</div>
+		<script type="text/javascript">
+			new Vue({
+				el : ".app",
+				data : {
+					username : '',
+					password : '',
+					info : ''
+				},
+				methods : {
+					login(){
+						this.$http.get("http://192.168.0.37/login.php",{
+							params:{
+								user:this.username,
+								pass:this.password
+							}
+						}).then(function(data){
+							if(data.body=="1"){
+								this.info="登录成功";
+							}else{
+								this.info="登录失败"
+							}
+						})
+						this.emptyinfo()
+					},
+					emptyinfo(){
+						setTimeout(function(){
+							this.info = ""
+						}.bind(this),1000);
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
